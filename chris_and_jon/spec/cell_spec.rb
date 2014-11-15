@@ -44,6 +44,6 @@ RSpec.describe Cell do
 
       cell = Cell.new
       neighbors = cell.neighbors()
-      expect(neighbor.first.alive?).to be true
+      expect(neighbors.first.alive?).to be true
   end
 end
