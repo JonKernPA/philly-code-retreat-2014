@@ -40,9 +40,10 @@ RSpec.describe Cell do
   end
 
   describe 'generation' do
-    # it 'Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.' do
-    #   cell = Cell.new
-    #   cell.state(false)
-    # end
+    it 'neighbors of cell are cell objects'
+
+      cell = Cell.new
+      neighbors = cell.neighbors()
+      expect(neighbor.first.alive?).to be true
   end
 end
