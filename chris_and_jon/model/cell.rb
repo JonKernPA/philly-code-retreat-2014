@@ -37,6 +37,8 @@ class Cell
       self.live
     elsif self.alive? and live_count > 3
       self.die
+    elsif self.alive? and (live_count == 2 or live_count == 3)
+      self.live
     end
   end
 end
