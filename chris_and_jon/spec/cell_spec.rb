@@ -66,9 +66,12 @@ RSpec.describe Cell do
       neighbors[2].die
       neighbors[3].die
       neighbors[4].die
+      neighbors[5].live
+      neighbors[6].live
+      neighbors[7].live
       cell.update
       expect(cell.alive?).to be true
-      
+
     end
   end
 end

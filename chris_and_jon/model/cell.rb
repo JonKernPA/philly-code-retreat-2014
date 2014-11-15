@@ -17,12 +17,24 @@ class Cell
   end
 
   def neighbors
-    @neighbors = []
-    8.times do
-      cell = Cell.new
-      cell.live
-      @neighbors << cell
+    if @neighbors
+    else
+      @neighbors = []
+      8.times do
+        cell = Cell.new
+        cell.live
+        @neighbors << cell
+      end
     end
     @neighbors
+  end
+
+  def update
+    live_neighbors = @neighbors.select {|c| c.alive?}
+    live_count = live_neighbors.count
+    
+    if !self.alive? and live_count == 3
+      self.live
+    end
   end
 end
