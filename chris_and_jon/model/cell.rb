@@ -1,7 +1,11 @@
 class Cell
 
+  def initialize
+    @state = true
+  end
+  
   def alive?
-    true
+    @state
   end
 
   def state(state)

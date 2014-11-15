@@ -7,6 +7,14 @@ RSpec.describe Cell do
     end
   end
 
+  describe 'dead' do
+    it "cell can be dead" do
+      cell = Cell.new
+      cell.state(false)
+      expect(cell.alive?).to be false
+    end
+  end
+
   describe '#state' do
     it "cell value is set" do
       cell = Cell.new
