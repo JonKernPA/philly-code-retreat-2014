@@ -32,9 +32,11 @@ class Cell
   def update
     live_neighbors = @neighbors.select {|c| c.alive?}
     live_count = live_neighbors.count
-    
+
     if !self.alive? and live_count == 3
       self.live
+    elsif self.alive? and live_count > 3
+      self.die
     end
   end
 end

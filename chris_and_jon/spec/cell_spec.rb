@@ -74,4 +74,24 @@ RSpec.describe Cell do
 
     end
   end
+
+  describe 'rule 3' do
+
+    it 'if cell is alive and has > 3 alive neighbors, die' do
+      cell = Cell.new
+      neighbors = cell.neighbors()
+      cell.live
+      neighbors[0].die
+      neighbors[1].die
+      neighbors[2].die
+      neighbors[3].die
+      neighbors[4].live
+      neighbors[5].live
+      neighbors[6].live
+      neighbors[7].live
+      cell.update
+      expect(cell.alive?).to be false
+
+    end
+  end
 end
