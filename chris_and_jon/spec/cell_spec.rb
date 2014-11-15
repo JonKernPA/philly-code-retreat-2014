@@ -40,10 +40,11 @@ RSpec.describe Cell do
   end
 
   describe 'generation' do
-    it 'neighbors of cell are cell objects'
-
+    it 'neighbors of cell are cell objects' do
       cell = Cell.new
       neighbors = cell.neighbors()
-      expect(neighbors.first.alive?).to be true
+      neighbor = neighbors.first
+      expect(neighbor.alive?).to be true
+      end
   end
 end

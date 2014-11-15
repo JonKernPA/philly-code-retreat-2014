@@ -17,6 +17,12 @@ class Cell
   end
 
   def neighbors
-    [1,2,3,4,5,6,7,8]
+    @neighbors = []
+    8.times do
+      cell = Cell.new
+      cell.live
+      @neighbors << cell
+    end
+    @neighbors
   end
 end
