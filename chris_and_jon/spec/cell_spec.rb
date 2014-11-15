@@ -22,4 +22,13 @@ RSpec.describe Cell do
       expect(cell.alive?).to be true
     end
   end
+
+  describe 'neighbors' do
+    it "cell has array of 8 neighbors" do
+      cell = Cell.new
+      neighbors = cell.neighbors()
+      expect(neighbors.count).to eq(8)
+
+    end
+  end
 end

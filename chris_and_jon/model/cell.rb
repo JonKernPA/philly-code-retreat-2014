@@ -3,7 +3,7 @@ class Cell
   def initialize
     @state = true
   end
-  
+
   def alive?
     @state
   end
