@@ -7,7 +7,7 @@ RSpec.describe Cell do
     end
   end
 
-  describe '#die'do
+  describe '#die' do
     it "cell can die" do
       cell = Cell.new
       cell.die
@@ -15,7 +15,7 @@ RSpec.describe Cell do
     end
   end
 
-  describe '#live'do
+  describe '#live' do
     it "cell can live" do
       cell = Cell.new
       cell.live
@@ -45,6 +45,13 @@ RSpec.describe Cell do
       neighbors = cell.neighbors()
       neighbor = neighbors.first
       expect(neighbor.alive?).to be true
-      end
+    end
+
+    it 'set specific neighbors' do
+      cell = Cell.new
+      neighbors = cell.neighbors()
+      neighbors[1].die
+      expect(neighbors[1].alive?).to be false
+    end
   end
 end
