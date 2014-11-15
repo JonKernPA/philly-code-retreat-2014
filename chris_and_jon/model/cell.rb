@@ -1,6 +1,6 @@
-class CodeRetreat
+class Cell
 
-  def to_s
-    "Be Happy! Do BDD/TDD!!"
+  def alive?
+    true
   end
 end
