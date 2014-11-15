@@ -1,7 +1,7 @@
 class Grid
   def initialize(x, y)
-    @x = x
-    @y = y
+    list = []
+
   end
 
   def number_cells
@@ -13,6 +13,10 @@ class Grid
   end
 
   def update
+
+  end
+
+  def set_cell(x, y, state)
 
   end
 
