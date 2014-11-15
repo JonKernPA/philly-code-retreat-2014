@@ -54,4 +54,21 @@ RSpec.describe Cell do
       expect(neighbors[1].alive?).to be false
     end
   end
+
+  describe 'rule 4' do
+
+    it 'if cell is dead and has exactly 3 alive neighbors, become alive' do
+      cell = Cell.new
+      neighbors = cell.neighbors()
+      cell.die
+      neighbors[0].die
+      neighbors[1].die
+      neighbors[2].die
+      neighbors[3].die
+      neighbors[4].die
+      cell.update
+      expect(cell.alive?).to be true
+      
+    end
+  end
 end
