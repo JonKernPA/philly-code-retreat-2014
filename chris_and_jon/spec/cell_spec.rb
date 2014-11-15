@@ -7,19 +7,27 @@ RSpec.describe Cell do
     end
   end
 
-  describe 'dead' do
-    it "cell can be dead" do
+  describe '#die'do
+    it "cell can die" do
       cell = Cell.new
-      cell.state(false)
+      cell.die
       expect(cell.alive?).to be false
     end
   end
 
-  describe '#state' do
-    it "cell value is set" do
+  describe '#live'do
+    it "cell can live" do
       cell = Cell.new
-      cell.state(true)
+      cell.live
       expect(cell.alive?).to be true
+    end
+  end
+
+  describe 'dead' do
+    it "cell can be dead" do
+      cell = Cell.new
+      cell.die
+      expect(cell.alive?).to be false
     end
   end
 
@@ -28,7 +36,13 @@ RSpec.describe Cell do
       cell = Cell.new
       neighbors = cell.neighbors()
       expect(neighbors.count).to eq(8)
-
     end
+  end
+
+  describe 'generation' do
+    # it 'Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.' do
+    #   cell = Cell.new
+    #   cell.state(false)
+    # end
   end
 end

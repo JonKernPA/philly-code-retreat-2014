@@ -8,8 +8,12 @@ class Cell
     @state
   end
 
-  def state(state)
-    @state = state
+  def live
+    @state = true
+  end
+
+  def die
+    @state = false
   end
 
   def neighbors
