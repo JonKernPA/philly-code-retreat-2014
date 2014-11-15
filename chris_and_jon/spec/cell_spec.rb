@@ -6,4 +6,12 @@ RSpec.describe Cell do
       expect(cell.alive?).to be true
     end
   end
+
+  describe '#state' do
+    it "cell value is set" do
+      cell = Cell.new
+      cell.state(true)
+      expect(cell.alive?).to be true
+    end
+  end
 end
