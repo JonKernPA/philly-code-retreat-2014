@@ -49,11 +49,9 @@ RSpec.describe Cell do
   end
 
   describe 'generation' do
-    it 'neighbors of cell are cell objects' do
+    it 'neighbors of cell are also cells' do
       cell = Cell.new
-      neighbors = cell.neighbors()
-      neighbor = neighbors.first
-      expect(neighbor.alive?).to be true
+      expect(cell.neighbors.first).to be_a_kind_of(Cell)
     end
 
     it 'set specific neighbors' do
@@ -80,7 +78,6 @@ RSpec.describe Cell do
       neighbors[7].live
       cell.update
       expect(cell.alive?).to be true
-
     end
   end
 
@@ -100,7 +97,6 @@ RSpec.describe Cell do
       neighbors[7].live
       cell.update
       expect(cell.alive?).to be false
-
     end
   end
 
@@ -120,8 +116,8 @@ RSpec.describe Cell do
       neighbors[7].live
       cell.update
       expect(cell.alive?).to be true
-
     end
+
     it 'if cell is alive and has 2 alive neighbors, live' do
       cell = Cell.new
       neighbors = cell.neighbors()
@@ -136,7 +132,6 @@ RSpec.describe Cell do
       neighbors[7].live
       cell.update
       expect(cell.alive?).to be true
-
     end
   end
 
@@ -156,7 +151,6 @@ RSpec.describe Cell do
       neighbors[7].live
       cell.update
       expect(cell.alive?).to be false
-
     end
   end
 end

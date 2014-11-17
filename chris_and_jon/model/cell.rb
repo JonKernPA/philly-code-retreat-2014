@@ -35,14 +35,28 @@ class Cell
 
   def update
     live_count = number_live_neighbors
+    self.live if in_reproductive_state(live_count) or in_balanced_state(live_count)
+    self.die if in_a_bad_state(live_count)
+  end
 
-    if !self.alive? and live_count == 3
-      self.live
-    elsif self.alive? and (live_count > 3 or live_count < 2)
-      self.die
-    elsif self.alive? and (live_count == 2 or live_count == 3)
-      self.live
-    end
+  def in_balanced_state(live_count)
+    self.alive? and (live_count == 2 or live_count == 3)
+  end
+
+  def in_overcrowded_state(live_count)
+    self.alive? and live_count > 3
+  end
+
+  def in_underpopulated_state(live_count)
+    self.alive? and live_count < 2
+  end
+
+  def in_a_bad_state(live_count)
+    in_overcrowded_state(live_count) or in_underpopulated_state(live_count)
+  end
+
+  def in_reproductive_state(live_count)
+    !self.alive? and live_count == 3
   end
 
   def number_live_neighbors
