@@ -21,23 +21,18 @@ class Cell
   end
 
   def neighbors
-    if @neighbors
-    else
-      @neighbors = []
-      8.times do
-        cell = Cell.new
-        cell.live
-        @neighbors << cell
-      end
+    @neighbors ||= begin
+      Array.new(8){ Cell.new }
     end
     @neighbors
   end
 
   def update
-    live_count = number_live_neighbors
-    self.live if in_reproductive_state(live_count) or in_balanced_state(live_count)
-    self.die if in_a_bad_state(live_count)
+    self.live if in_reproductive_state(live_neighbors) or in_balanced_state(live_neighbors)
+    self.die if in_a_bad_state(live_neighbors)
   end
+
+  private
 
   def in_balanced_state(live_count)
     self.alive? and (live_count == 2 or live_count == 3)
@@ -59,7 +54,7 @@ class Cell
     !self.alive? and live_count == 3
   end
 
-  def number_live_neighbors
-    live_count = @neighbors.select { |c| c.alive? }.count
+  def live_neighbors
+    @neighbors.select { |c| c.alive? }.count
   end
 end
