@@ -1,9 +1,18 @@
 require './model/cell'
 RSpec.describe Cell do
   describe '#alive?' do
-    it "cell is alive by default" do
+    it "cell can be alive" do
       cell = Cell.new
+      cell.live
       expect(cell.alive?).to be true
+    end
+  end
+
+  describe '#dead?' do
+    it "cell can be dead" do
+      cell = Cell.new
+      cell.die
+      expect(cell.dead?).to be true
     end
   end
 

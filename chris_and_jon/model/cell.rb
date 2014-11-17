@@ -5,7 +5,11 @@ class Cell
   end
 
   def alive?
-    @state
+    @state == true
+  end
+
+  def dead?
+    @state == false
   end
 
   def live
@@ -30,8 +34,7 @@ class Cell
   end
 
   def update
-    live_neighbors = @neighbors.select {|c| c.alive?}
-    live_count = live_neighbors.count
+    live_count = number_live_neighbors
 
     if !self.alive? and live_count == 3
       self.live
@@ -40,5 +43,9 @@ class Cell
     elsif self.alive? and (live_count == 2 or live_count == 3)
       self.live
     end
+  end
+
+  def number_live_neighbors
+    live_count = @neighbors.select { |c| c.alive? }.count
   end
 end
