@@ -11,4 +11,16 @@ class Board
   def dimensions
     [@rows, @cols]
   end
+
+  def cell(row, col)
+    @grid[row][col]
+  end
+
+  def [](row, col)
+    @grid[row][col]
+  end
+
+  def []=(row, col, cell)
+    @grid[row][col] = cell
+  end
 end

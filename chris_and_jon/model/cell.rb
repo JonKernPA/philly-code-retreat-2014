@@ -3,8 +3,8 @@ class Cell
   ALIVE = 1
   DEAD = 2
 
-  def initialize
-    @state = ALIVE
+  def initialize(state = ALIVE)
+    @state = state
   end
 
   def alive?
@@ -30,6 +30,11 @@ class Cell
   def update
     self.live if in_reproductive_state(live_neighbors) or in_balanced_state(live_neighbors)
     self.die if in_a_bad_state(live_neighbors)
+  end
+
+  def to_s
+    "ALIVE" if alive?
+    "DEAD" if dead?
   end
 
   private

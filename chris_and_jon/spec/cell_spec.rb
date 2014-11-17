@@ -1,4 +1,5 @@
 require './model/cell'
+
 RSpec.describe Cell do
   describe 'the cell' do
     it "can live" do
@@ -7,9 +8,8 @@ RSpec.describe Cell do
       expect(cell.alive?).to be true
     end
 
-    it "can be alive" do
-      cell = Cell.new
-      cell.live
+    it "can be alive to start" do
+      cell = Cell.new(Cell::ALIVE)
       expect(cell.alive?).to be true
     end
 
@@ -19,9 +19,8 @@ RSpec.describe Cell do
       expect(cell.alive?).to be false
     end
 
-    it "can be dead" do
-      cell = Cell.new
-      cell.die
+    it "can be dead to start" do
+      cell = Cell.new(Cell::DEAD)
       expect(cell.dead?).to be true
     end
 

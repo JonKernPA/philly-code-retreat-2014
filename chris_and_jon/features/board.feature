@@ -16,9 +16,16 @@ Feature: The Game of Life is a board game, of sorts...
     Given A board set up as follows:
       | - | - | - | - |
       | - | + | + | - |
-      | - | + | + | - |
-      | - | - | - | - |
+      | - | + | - | - |
+      | - | - | - | + |
     Then I should have a board with 4 rows and 4 columns
+    And The cell at row 0, col 0 is dead
+    And The cell at row 1, col 1 is alive
+    And The cell at row 1, col 2 is alive
+    And The cell at row 2, col 1 is alive
+    And The cell at row 2, col 2 is dead
+    And The cell at row 3, col 3 is alive
+
 
   Scenario: A board can be set up to a certain size, and initialized
     Given A board set up as follows:
