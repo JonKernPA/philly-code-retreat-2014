@@ -24,10 +24,7 @@ class Cell
   end
 
   def neighbors
-    @neighbors ||= begin
-      Array.new(8){ Cell.new }
-    end
-    @neighbors
+    @neighbors ||= Array.new(8){ Cell.new }
   end
 
   def update
