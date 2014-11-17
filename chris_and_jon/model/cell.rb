@@ -1,23 +1,26 @@
 class Cell
 
+  ALIVE = 1
+  DEAD = 2
+
   def initialize
-    @state = true
+    @state = ALIVE
   end
 
   def alive?
-    @state == true
+    @state == ALIVE
   end
 
   def dead?
-    @state == false
+    @state == DEAD
   end
 
   def live
-    @state = true
+    @state = ALIVE
   end
 
   def die
-    @state = false
+    @state = DEAD
   end
 
   def neighbors
