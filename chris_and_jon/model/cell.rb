@@ -2,6 +2,15 @@ class Cell
 
   ALIVE = 1
   DEAD = 2
+  
+  UPPER_LEFT  = 0
+  UPPER       = 1
+  UPPER_RIGHT = 2
+  RIGHT       = 3
+  LOWER_RIGHT = 4
+  LOWER       = 5
+  LOWER_LEFT  = 6
+  LEFT        = 7
 
   def initialize(state = ALIVE)
     @state = state
@@ -24,7 +33,7 @@ class Cell
   end
 
   def neighbors
-    @neighbors ||= Array.new(8){ Cell.new }
+    @neighbors ||= Array.new(8) { Cell.new }
   end
 
   def update

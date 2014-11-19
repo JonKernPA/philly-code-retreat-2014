@@ -27,4 +27,29 @@ RSpec.describe Board do
     expect(board[2,3].alive?).to be false
   end
 
+  it 'sets cell neighbors' do
+    board = Board.new(1,3)
+    cell_0_0 = Cell.new(Cell::DEAD)
+    cell_0_1 = Cell.new(Cell::ALIVE)
+    cell_0_2 = Cell.new(Cell::DEAD)
+
+    board[0,0] = cell_0_0
+    board[0,1] = cell_0_1
+    board[0,2] = cell_0_2
+
+    board.set_neighbors
+    puts board
+    # ap board[0,0].neighbors
+    # ap board[0,1].neighbors
+
+    expect(board[0,0].neighbors[Cell::LEFT]).to eq(nil)
+    expect(board[0,0].neighbors[Cell::RIGHT]).to eq(cell_0_1)
+    expect(board[0,1].neighbors[Cell::LEFT]).to eq(cell_0_0)
+    expect(board[0,1].neighbors[Cell::RIGHT]).to eq(cell_0_2)
+  end
+
+  it "can evolve to the next generation" do
+
+  end
+
 end
