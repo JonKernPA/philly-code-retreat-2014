@@ -259,7 +259,8 @@ RSpec.describe Board do
       expect(board.state).to eq(initial_state)
     end
   end
-  describe 'run' do
+
+  describe 'run some sample boards' do
     it 'runs a few ticks' do
       initial_state = [
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

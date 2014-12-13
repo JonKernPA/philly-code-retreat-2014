@@ -6,45 +6,48 @@ class Board
   end
 
   def tick
-    rows = @state.count
-    cols = @state.first.count
+    new_state = Array.new(number_rows) { Array.new(number_columns) }
 
-    new_state = Array.new(rows){Array.new(cols)}
+    (1..number_rows).each do |r|
+      (1..number_columns).each do |c|
+        current_cell = cell(r, c)
 
-    (1..rows).each do |r|
-      (1..cols).each do |c|
-        current_cell = cell(r,c)
-
-        live_count = live_neighbors(r,c)
-
-        cell_state = 0
+        live_count = live_neighbors(r, c)
 
         if current_cell == 1
           # Live
-          # Any live cell with fewer than two live neighbours dies, as if caused by under-population.
-          if live_count < 2
-            cell_state = 0
-          end
-          # Any live cell with two or three live neighbours lives on to the next generation.
-          if live_count == 2 || live_count == 3
-            cell_state = 1
-          end
-          # Any live cell with more than three live neighbours dies, as if by overcrowding.
-          if live_count > 3
-            cell_state = 0
-          end
-
+          cell_state = case live_count
+                         # Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+                         when 0..1
+                           0
+                         # Any live cell with two or three live neighbours lives on to the next generation.
+                         when 2..3
+                           1
+                         # Any live cell with more than three live neighbours dies, as if by overcrowding.
+                         else
+                           0
+                       end
         else
           # Dead
           # Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
           if live_count == 3
             cell_state = 1
+          else
+            cell_state = 0
           end
         end
         new_state[r - 1][c - 1] = cell_state
-                                                                                                                                                                     end
+      end
     end
     @state = new_state
+  end
+
+  def number_rows
+    @state.count
+  end
+
+  def number_columns
+    @state.first.count
   end
 
   def cell(cell_row, cell_col)
@@ -58,15 +61,12 @@ class Board
     col = cell_col - 1
 
     min_row = [row - 1, 0].max
-    max_row = [row + 1, @state.count - 1].min
+    max_row = [row + 1, number_rows - 1].min
     min_col = [col - 1, 0].max
-    max_col = [col + 1, @state.first.count - 1].min
+    max_col = [col + 1, number_columns - 1].min
 
     (min_row..max_row).each do |r|
-      (min_col..max_col).each do |c|
-        # puts "for #{r}:#{c} ==> #{@state[r][c]}"
-        count += @state[r][c]
-      end
+      count += (min_col..max_col).inject(0) {|count,c| count + @state[r][c]}
     end
     count - @state[row][col]
   end
