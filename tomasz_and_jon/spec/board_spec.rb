@@ -19,7 +19,8 @@ RSpec.describe Board do
     end
 
     describe '#rules' do
-      before(:each) do
+      # Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+      it 'Rule #1 under-population' do
         # Given
         initial_state = [
             [0, 0, 0, 0, 0],
@@ -28,16 +29,10 @@ RSpec.describe Board do
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0],
         ]
-        @board = Board.new(
-            initial_state
-        )
-      end
-
-      # Any live cell with fewer than two live neighbours dies, as if caused by under-population.
-      it 'Rule #1 under-population' do
+        board = Board.new(initial_state)
         # When
-        @board.tick
-        expect(@board.cell(3, 2)).to eq(0)
+        board.tick
+        expect(board.cell(3, 2)).to eq(0)
       end
 
       # Any live cell with more than three live neighbours dies, as if by overcrowding.
@@ -50,9 +45,7 @@ RSpec.describe Board do
             [0, 0, 1, 0, 0],
             [0, 0, 0, 0, 0],
         ]
-        board = Board.new(
-            initial_state
-        )
+        board = Board.new(initial_state)
         # When
         board.tick
         expect(board.cell(3, 3)).to eq(0)
@@ -68,9 +61,7 @@ RSpec.describe Board do
             [0, 0, 1, 0, 0],
             [0, 0, 0, 0, 0],
         ]
-        board = Board.new(
-            initial_state
-        )
+        board = Board.new(initial_state)
         # When
         board.tick
         expect(board.cell(3, 3)).to eq(1)
@@ -79,20 +70,41 @@ RSpec.describe Board do
 
       # Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
       it 'Rule #4 reproduction' do
+        # Given
+        initial_state = [
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 1, 1, 1, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+        ]
+        board = Board.new(initial_state)
         # When
-        @board.tick
-        expect(@board.cell(2, 3)).to eq(1)
+        board.tick
+        expect(board.cell(2, 3)).to eq(1)
       end
 
       # Any live cell with fewer than two live neighbours dies,
       it 'counts live neighbors' do
-        expect(@board.live_neighbors(3, 3)).to eq(2)
-        expect(@board.live_neighbors(3, 2)).to eq(1)
+        # Given
+        initial_state = [
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 1, 1, 1, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+        ]
+        board = Board.new(initial_state)
+        expect(board.live_neighbors(3, 3)).to eq(2)
+        expect(board.live_neighbors(3, 2)).to eq(1)
       end
-
-
     end
 
+    describe '#print' do
+      it 'should produce text output for the array' do
+
+      end
+    end
 
   end
 
