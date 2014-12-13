@@ -10,9 +10,7 @@ RSpec.describe Board do
           [0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0],
       ]
-      board = Board.new(
-          initial_state
-      )
+      board = Board.new(initial_state)
       # When/Then
       expect(board.state).to eq(initial_state)
 
@@ -100,9 +98,16 @@ RSpec.describe Board do
       end
     end
 
-    describe '#print' do
+    describe '#print_array' do
       it 'should produce text output for the array' do
-
+        # Given
+        initial_state = [
+            [0, 0],
+            [0, 1],
+        ]
+        board = Board.new(initial_state)
+        expected_state = "░░\n░█"
+        expect(board.print_array).to eq(expected_state)
       end
     end
 
@@ -117,9 +122,7 @@ RSpec.describe Board do
           [0, 1, 1, 0],
           [0, 0, 0, 0],
       ]
-      board = Board.new(
-          initial_state
-      )
+      board = Board.new(initial_state)
       # When
       board.tick
       # Then
@@ -135,9 +138,7 @@ RSpec.describe Board do
           [0, 0, 1, 1, 0, 0],
           [0, 0, 0, 0, 0, 0],
       ]
-      board = Board.new(
-          initial_state
-      )
+      board = Board.new(initial_state)
       # When
       board.tick
       # Then
@@ -153,9 +154,7 @@ RSpec.describe Board do
           [0, 0, 1, 1, 0, 0],
           [0, 0, 0, 0, 0, 0],
       ]
-      board = Board.new(
-          initial_state
-      )
+      board = Board.new(initial_state)
       # When
       board.tick
       # Then
@@ -171,9 +170,7 @@ RSpec.describe Board do
           [0, 0, 1, 0, 0],
           [0, 0, 0, 0, 0],
       ]
-      board = Board.new(
-          initial_state
-      )
+      board = Board.new(initial_state)
       # When
       board.tick
       # Then
@@ -189,9 +186,7 @@ RSpec.describe Board do
           [0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0],
       ]
-      board = Board.new(
-          initial_state
-      )
+      board = Board.new(initial_state)
       # When
       board.tick
       # Then
@@ -218,9 +213,7 @@ RSpec.describe Board do
           [0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0],
       ]
-      board = Board.new(
-          initial_state
-      )
+      board = Board.new(initial_state)
       # When
       board.tick
       # Then
@@ -248,9 +241,7 @@ RSpec.describe Board do
           [0, 0, 0, 1, 1, 0],
           [0, 0, 0, 0, 0, 0],
       ]
-      board = Board.new(
-          initial_state
-      )
+      board = Board.new(initial_state)
       # When
       board.tick
       # Then
@@ -282,9 +273,7 @@ RSpec.describe Board do
           [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       ]
-      board = Board.new(
-          initial_state
-      )
+      board = Board.new(initial_state)
 
       board.run(10)
     end
@@ -298,10 +287,7 @@ RSpec.describe Board do
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       ]
-      board = Board.new(
-          initial_state
-      )
-
+      board = Board.new(initial_state)
       board.run(10)
     end
 
@@ -313,10 +299,7 @@ RSpec.describe Board do
           [0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0],
       ]
-      board = Board.new(
-          initial_state
-      )
-
+      board = Board.new(initial_state)
       board.run(5)
     end
   end
