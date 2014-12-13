@@ -76,16 +76,22 @@ class Board
   end
 
   def run(evolutions)
+    STDERR.print "\e[2J\e[f"
     evolutions.times.each do |i|
       puts "- "*evolutions
-      sleep 1
+      old_state = @state
+      sleep 0.5
       tick
       @state.count.times.each do |r|
         text = ''
         @state.first.count.times.each do |c|
-          text += @state[r][c] == 0 ? ' ' : '*'
+          text += @state[r][c] == 0 ? '░' : '█'
         end
         puts text
+      end
+      if old_state == @state
+        puts "Board has not evolved"
+        break
       end
     end
   end

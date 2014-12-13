@@ -1,6 +1,6 @@
 require './model/board'
 RSpec.describe Board do
-  describe 'Board' do
+  describe 'Board Basics' do
     it "can be initialized with a 2D array" do
       # Given
       initial_state = [
@@ -96,71 +96,201 @@ RSpec.describe Board do
 
   end
 
-  describe 'Blinker' do
-    it "oscillates from horizontal to vertical form" do
+  describe 'Classic Patterns' do
+    it 'Block Still Life' do
       # Given
+      initial_state = [
+          [0, 0, 0, 0],
+          [0, 1, 1, 0],
+          [0, 1, 1, 0],
+          [0, 0, 0, 0],
+      ]
       board = Board.new(
-          [
-              [0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0],
-              [0, 1, 1, 1, 0],
-              [0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0],
-          ]
+          initial_state
       )
       # When
       board.tick
       # Then
-      expected_state =
-          [
-              [0, 0, 0, 0, 0],
-              [0, 0, 1, 0, 0],
-              [0, 0, 1, 0, 0],
-              [0, 0, 1, 0, 0],
-              [0, 0, 0, 0, 0],
-          ]
-      expect(board.state).to eq(expected_state)
+      expect(board.state).to eq(initial_state)
     end
 
-    it "oscillates from vertical to horizontal form" do
+    it 'Beehive Still Life' do
       # Given
+      initial_state = [
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 1, 1, 0, 0],
+          [0, 1, 0, 0, 1, 0],
+          [0, 0, 1, 1, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+      ]
       board = Board.new(
-          [
-              [0, 0, 0, 0, 0],
-              [0, 0, 1, 0, 0],
-              [0, 0, 1, 0, 0],
-              [0, 0, 1, 0, 0],
-              [0, 0, 0, 0, 0],
-          ]
+          initial_state
       )
       # When
       board.tick
       # Then
-      expected_state =
-          [
-              [0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0],
-              [0, 1, 1, 1, 0],
-              [0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0],
-          ]
-      expect(board.state).to eq(expected_state)
+      expect(board.state).to eq(initial_state)
     end
-  end
-  describe 'run' do
-    it 'runs a few ticks' do
+
+    it 'Loaf Still Life' do
+      # Given
+      initial_state = [
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 1, 1, 0, 0],
+          [0, 1, 0, 0, 1, 0],
+          [0, 0, 1, 1, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+      ]
+      board = Board.new(
+          initial_state
+      )
+      # When
+      board.tick
+      # Then
+      expect(board.state).to eq(initial_state)
+    end
+
+    it 'Boat Still Life' do
+      # Given
       initial_state = [
           [0, 0, 0, 0, 0],
-          [0, 0, 1, 0, 0],
-          [0, 1, 1, 1, 0],
+          [0, 1, 1, 0, 0],
+          [0, 1, 0, 1, 0],
           [0, 0, 1, 0, 0],
           [0, 0, 0, 0, 0],
       ]
       board = Board.new(
           initial_state
       )
+      # When
+      board.tick
+      # Then
+      expect(board.state).to eq(initial_state)
+    end
 
-      board.run(15)
+    it "Blinker oscillates from horizontal to vertical form" do
+      # Given
+      initial_state = [
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 1, 1, 1, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+      ]
+      board = Board.new(
+          initial_state
+      )
+      # When
+      board.tick
+      # Then
+      expected_state =
+          [
+              [0, 0, 0, 0, 0],
+              [0, 0, 1, 0, 0],
+              [0, 0, 1, 0, 0],
+              [0, 0, 1, 0, 0],
+              [0, 0, 0, 0, 0],
+          ]
+      expect(board.state).to eq(expected_state)
+      board.tick
+      expect(board.state).to eq(initial_state)
+    end
+
+    it "Toad blinker" do
+      # Given
+      initial_state = [
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 1, 1, 1, 0],
+          [0, 1, 1, 1, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+      ]
+      board = Board.new(
+          initial_state
+      )
+      # When
+      board.tick
+      # Then
+      expected_state =
+          [
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 1, 0, 0],
+              [0, 1, 0, 0, 1, 0],
+              [0, 1, 0, 0, 1, 0],
+              [0, 0, 1, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+          ]
+      expect(board.state).to eq(expected_state)
+      board.tick
+      expect(board.state).to eq(initial_state)
+    end
+
+    it "Beacon blinker" do
+      # Given
+      initial_state = [
+          [0, 0, 0, 0, 0, 0],
+          [0, 1, 1, 0, 0, 0],
+          [0, 1, 1, 0, 0, 0],
+          [0, 0, 0, 1, 1, 0],
+          [0, 0, 0, 1, 1, 0],
+          [0, 0, 0, 0, 0, 0],
+      ]
+      board = Board.new(
+          initial_state
+      )
+      # When
+      board.tick
+      # Then
+      expected_state =
+          [
+              [0, 0, 0, 0, 0, 0],
+              [0, 1, 1, 0, 0, 0],
+              [0, 1, 0, 0, 0, 0],
+              [0, 0, 0, 0, 1, 0],
+              [0, 0, 0, 1, 1, 0],
+              [0, 0, 0, 0, 0, 0],
+          ]
+      expect(board.state).to eq(expected_state)
+      board.tick
+      expect(board.state).to eq(initial_state)
+    end
+  end
+  describe 'run' do
+    it 'runs a few ticks' do
+      initial_state = [
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+          [0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+          [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+          [0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+          [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ]
+      board = Board.new(
+          initial_state
+      )
+
+      board.run(10)
+    end
+
+    it 'runs non-square' do
+      initial_state = [
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+          [0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+          [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ]
+      board = Board.new(
+          initial_state
+      )
+
+      board.run(10)
     end
 
     it 'runs a blinker' do
