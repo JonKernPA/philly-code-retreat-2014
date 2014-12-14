@@ -1,8 +1,28 @@
+# A great way to run this app (form IRB)
+#     2.1.2 :003 > require './board'
+#     => true
+#     2.1.2 :004 > board = Board.new(50); board.run(100)
+
 class Board
 
   def initialize(initial_state)
-    @state = initial_state
+    if initial_state.kind_of? Array
+      @state = initial_state
+      @sleep = 2.0/[number_rows,number_columns].max
+    else
+      @state = randomized_array(initial_state)
+      @sleep = 2.0/initial_state
+    end
+  end
 
+  def randomized_array(dim)
+    rows = Array.new(dim)
+    rows.each_with_index do |row, i|
+      arr = Array.new(dim)
+      arr.fill {|c| rand(2)}
+      rows[i] = arr
+    end
+    rows
   end
 
   def tick
@@ -78,7 +98,7 @@ class Board
   def run(evolutions)
     evolutions.times.each do |i|
       old_state = @state
-      sleep 0.5
+      sleep @sleep
       tick
       STDERR.puts print_array
       if old_state == @state

@@ -16,6 +16,16 @@ RSpec.describe Board do
 
     end
 
+    describe 'Random initialization' do
+      it 'can be initialized with a dimension' do
+        dim = 20
+        board = Board.new(dim)
+
+        expect(board.number_columns).to eq(dim)
+        expect(board.number_rows).to eq(dim)
+      end
+    end
+
     describe '#rules' do
       # Any live cell with fewer than two live neighbours dies, as if caused by under-population.
       it 'Rule #1 under-population' do
