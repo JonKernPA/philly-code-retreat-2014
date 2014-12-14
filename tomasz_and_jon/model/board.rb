@@ -1,6 +1,5 @@
-# A great way to run this app (form IRB)
+# A great way to run this app (from IRB at the model directory)
 #     2.1.2 :003 > require './board'
-#     => true
 #     2.1.2 :004 > board = Board.new(50); board.run(100)
 
 class Board
@@ -8,11 +7,10 @@ class Board
   def initialize(initial_state)
     if initial_state.kind_of? Array
       @state = initial_state
-      @sleep = 2.0/[number_rows,number_columns].max
     else
       @state = randomized_array(initial_state)
-      @sleep = 2.0/initial_state
     end
+    @sleep = 2.0/[number_rows,number_columns].max
   end
 
   def randomized_array(dim)
@@ -25,6 +23,9 @@ class Board
     rows
   end
 
+  DEAD = 0
+  ALIVE = 1
+
   def tick
     new_state = Array.new(number_rows) { Array.new(number_columns) }
 
@@ -34,27 +35,29 @@ class Board
 
         live_count = live_neighbors(r, c)
 
-        if current_cell == 1
+        if current_cell == ALIVE
           # Live
           cell_state = case live_count
                          # Any live cell with fewer than two live neighbours dies, as if caused by under-population.
                          when 0..1
-                           0
+                           DEAD
                          # Any live cell with two or three live neighbours lives on to the next generation.
                          when 2..3
-                           1
+                           ALIVE
                          # Any live cell with more than three live neighbours dies, as if by overcrowding.
                          else
-                           0
+                           DEAD
                        end
-        else
+        elsif current_cell == DEAD
           # Dead
           # Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
           if live_count == 3
-            cell_state = 1
+            cell_state = ALIVE
           else
-            cell_state = 0
+            cell_state = DEAD
           end
+        else
+          STDERR.print "Houston, we have a problem... Cells cannot be in between Alive and Dead!"
         end
         new_state[r - 1][c - 1] = cell_state
       end
@@ -96,13 +99,16 @@ class Board
   end
 
   def run(evolutions)
+    old_state = nil
     evolutions.times.each do |i|
+      older_state = old_state if old_state
       old_state = @state
       sleep @sleep
       tick
       STDERR.puts print_array
-      if old_state == @state
-        puts "Board has not evolved"
+
+      if old_state == @state || older_state == @state
+        $stderr.puts "Board has not evolved"
         break
       end
     end

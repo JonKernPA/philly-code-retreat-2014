@@ -185,6 +185,11 @@ RSpec.describe Board do
       board.tick
       # Then
       expect(board.state).to eq(initial_state)
+      # specify { expect{board.tick}.to output("Board has not evolved").to_stderr}
+    end
+
+    def crap
+
     end
 
     it "Blinker oscillates from horizontal to vertical form" do
@@ -267,6 +272,37 @@ RSpec.describe Board do
       expect(board.state).to eq(expected_state)
       board.tick
       expect(board.state).to eq(initial_state)
+    end
+
+    describe 'Detects some steady state or repeating conditions' do
+      it 'Boat Still Life halts running' do
+        # Given
+        initial_state = [
+            [0, 0, 0, 0, 0],
+            [0, 1, 1, 0, 0],
+            [0, 1, 0, 1, 0],
+            [0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0],
+        ]
+        board = Board.new(initial_state)
+        # Then
+        expect { board.run(2) }.to output("Board has not evolved\n").to_stderr
+      end
+
+      it "Blinker of period 2 halts running" do
+        # Given
+        initial_state = [
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 1, 1, 1, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+        ]
+        board = Board.new(initial_state)
+        # Then
+        expect { board.run(3) }.to output("Board has not evolved\n").to_stderr
+      end
+
     end
   end
 
